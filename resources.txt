@@ -1,0 +1,6 @@
+https://twython.readthedocs.io/en/latest/usage/special_functions.html
+https://developer.twitter.com/en/docs/api-reference-index
+https://stackoverflow.com/questions/5963792/how-to-get-twitter-followers-using-twython
+https://projects.raspberrypi.org/en/projects/getting-started-with-the-twitter-api/6
+https://stackoverflow.com/questions/33708592/using-twython-to-get-user-ids-from-a-list-of-screen-names-twitter-api
+https://www.saltycrane.com/blog/2008/06/how-to-get-current-date-and-time-in/

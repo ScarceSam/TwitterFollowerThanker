@@ -1,0 +1,7 @@
+user_name           = 'TwitterHandle'
+consumer_key        = 'Twitter API key'
+consumer_secret     = 'Twitter API Secret key'
+access_token        = 'Twitter Access Token'
+access_token_secret = 'Twitter Access Token Secret'
+
+
