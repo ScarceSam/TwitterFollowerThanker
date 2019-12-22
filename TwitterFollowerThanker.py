@@ -157,7 +157,9 @@ while(1):
                         DB.commit()
                         tweetSent = True
                     #else if data.thanked = 0 and time_since_last_tweet < delay
+                    else if((current[6] == 0) and (tweetSent  == True)):
                         #people to than +1
+                        followers_to_thank += 1
                     #remove name from follower_list
                 #if found in follower_list with data.is_follower = 0
                     #if data.thanked = 0
