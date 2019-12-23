@@ -53,19 +53,25 @@ def getUsersTwitterData(queried_user):
 
 
 def followBackTweet(user):
-    print("Thank {} for the Follow Back :)".format(user))
+    print("Thanks {} for the Follow Back :)".format(user))
 
 
 def followTweet(user):
-    print("Thank {} for the Follow :)".format(user))    
+    print("Thanks {} for the Follow :)".format(user))
 
 
 def reFollowBackTweet(user):
-    print("Thank {} for the reFollow Back :)".format(user))
+    print("Thanks {} for the reFollow Back :)".format(user))
 
 
 def reFollowTweet(user):
-    print("Thank {} for the reFollow :)".format(user))
+    print("Thanks {} for the reFollow :)".format(user))
+
+
+def userName(userID):
+    print("Fetching user's screen name")
+    userObject = twitter.lookup_user(user_id = userID)
+    return ("@%s" % userObject[0]['screen_name'])
 
 ######### Progress Bar #########
 

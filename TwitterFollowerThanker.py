@@ -150,11 +150,12 @@ while(1):
                 if( (current[0] in follower_list) and ( current[2] == 1)):
                     #if data.thanked = 0 and time_since_last_tweet > delay
                     if( (current[6] == 0) and (tweetSent  == False)):
+                        userName = cF.userName(current[0])
                         #send thank you tweet
-                        print("thanks {}".format(current[0]))
+                        cF.followTweet(userName)
                         #data.thanked = 1
-                        ent = (current[0],)
-                        cursorObj.execute('''UPDATE connections SET thanked = 1 WHERE user_IDs = ?''', ent)
+                        ent = (userName, current[0],)
+                        cursorObj.execute('''UPDATE connections SET screen_name = ?, thanked = 1 WHERE user_IDs = ?''', ent)
                         DB.commit()
                         tweetSent = True
                     #else if data.thanked = 0 and time_since_last_tweet < delay
@@ -166,35 +167,37 @@ while(1):
                 elif ((current[0] in follower_list) and (current[2] == 0)):
                     #if data.thanked = 0
                     if ((current[6] == 0) and (tweetSent == False)):
+                        userName = cF.lookupScreenName(current[0])
                         #if data.is_friend = 1
                         if (current[4] == 1):
                             #"follow back thanks"
-                            cF.followBackTweet(current[0])
+                            cF.followBackTweet(userName)
                             tweetSent = True
                         #else
                         else:
                             #"thanks"
-                            cF.followTweet(current[0])
+                            cF.followTweet(userName)
                             tweetSent = True
                         #data.thanked = 1
-                        ent = (now.replace(microsecond=0), current[0],)
-                        cursorObj.execute('''UPDATE connections SET isFollower = 1, followDate = ?, thanked = 1 WHERE user_IDs = ?''', ent)
+                        ent = (userName, now.replace(microsecond=0), current[0],)
+                        cursorObj.execute('''UPDATE connections SET screen_name = ?, isFollower = 1, followDate = ?, thanked = 1 WHERE user_IDs = ?''', ent)
                         DB.commit()
                     #else if data.rethanked = 0
                     elif ((current[6] == 1) and (tweetSent == False)):
+                        userName = cF.userName(current[0])
                         #if data.is_friend = 1
                         if (current[4] == 1):
                             #"follow back rethanks"
-                            cF.reFollowBackTweet(current[0])
+                            cF.reFollowBackTweet(userName)
                             tweetSent = True
                         #else
                         else:
                             #"rethanks"
-                            cF.reFollowTweet(current[0])
+                            cF.reFollowTweet(userName)
                             tweetSent = True
                         #data.rethanked = 1
-                        ent = (now.replace(microsecond=0), current[0],)
-                        cursorObj.execute('''UPDATE connections SET isFollower = 1, followDate = ?, rethanked = 1 WHERE user_IDs = ?''', ent)
+                        ent = (userName, now.replace(microsecond=0), current[0],)
+                        cursorObj.execute('''UPDATE connections SET screen_name = ?, isFollower = 1, followDate = ?, rethanked = 1 WHERE user_IDs = ?''', ent)
                         DB.commit()
                     elif (tweetSent == True):
                         followers_to_thank += 1
