@@ -157,24 +157,55 @@ while(1):
                         DB.commit()
                         tweetSent = True
                     #else if data.thanked = 0 and time_since_last_tweet < delay
-                    else if((current[6] == 0) and (tweetSent  == True)):
+                    elif((current[6] == 0) and (tweetSent  == True)):
                         #people to than +1
                         followers_to_thank += 1
                     #remove name from follower_list
                 #if found in follower_list with data.is_follower = 0
+                elif ((current[0] in follower_list) and (current[2] == 0)):
                     #if data.thanked = 0
+                    if ((current[6] == 0) and (tweetSent == False)):
                         #if data.is_friend = 1
+                        if (current[4] == 1):
                             #"follow back thanks"
+                            print("Thank {} for the Follow Back :)".format(current[0]))
+                            tweetSent = True
                         #else
+                        else:
                             #"thanks"
+                            print("Thank {} for the Follow :)".format(current[0]))
+                            tweetSent = True
                         #data.thanked = 1
+                        ent = (current[0],)
+                        cursorObj.execute('''UPDATE connections SET thanked = 1 WHERE user_IDs = ?''', ent)
+                        DB.commit()
                     #else if data.rethanked = 0
-                        #"rethanks"
+                    elif ((current[6] == 1) and (tweetSent == False)):
+                        #if data.is_friend = 1
+                        if (current[4] == 1):
+                            #"follow back rethanks"
+                            print("Thank {} for the reFollow Back :)".format(current[0]))
+                            tweetSent = True
+                        #else
+                        else:
+                            #"rethanks"
+                            print("Thank {} for the reFollow :)".format(current[0]))
+                            tweetSent = True
                         #data.rethanked = 1
+                        ent = (current[0],)
+                        cursorObj.execute('''UPDATE connections SET rethanked = 1 WHERE user_IDs = ?''', ent)
+                        DB.commit()
                     #update data.is_follower = 1
+                    ent = (now.replace(microsecond=0), current[0],)
+                    cursorObj.execute('''UPDATE connections SET isFollower = 1, followDate = ?  WHERE user_IDs = ?''', ent)
+                    DB.commit()
                     #remove name from follower_list
                 #if not found in follower_list
+                elif (current[0] not in follower_list):
                     #update data.is_follower = 0
+                    ent = (current[0],)
+                    cursorObj.execute('''UPDATE connections SET isFollower = 0, followDate = ''  WHERE user_IDs = ?''', ent)
+                    DB.commit()
                     #remove name from follower_list
 
             #name in follower_list
