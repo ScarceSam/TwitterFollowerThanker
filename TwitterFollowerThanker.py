@@ -136,6 +136,7 @@ while(1):
 
         if followerDif or followers_to_thank:
             tweetSent = False
+            followers_to_thank = 0
             ######################################update is_follower (?repeat until tweet sent?)<- maybe not###########
             rowsInDB = cF.total_rows(cursorObj, 'connections', False)
     #        cF.startProgress('Updating is_Follower')
@@ -219,7 +220,7 @@ while(1):
             ##save the screen_name of up to 20 users missing them in the DB.
 
     #followers_to_thank = 1 #dev
-    print('Pausing loop')
+    print('Pausing loop, people to thank = %d' % followers_to_thank)
     time.sleep(loopPause)
 
     #exit() #dev
