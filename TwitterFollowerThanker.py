@@ -169,12 +169,12 @@ while(1):
                         #if data.is_friend = 1
                         if (current[4] == 1):
                             #"follow back thanks"
-                            print("Thank {} for the Follow Back :)".format(current[0]))
+                            cF.followBackTweet(current[0])
                             tweetSent = True
                         #else
                         else:
                             #"thanks"
-                            print("Thank {} for the Follow :)".format(current[0]))
+                            cF.followTweet(current[0])
                             tweetSent = True
                         #data.thanked = 1
                         ent = (now.replace(microsecond=0), current[0],)
@@ -185,12 +185,12 @@ while(1):
                         #if data.is_friend = 1
                         if (current[4] == 1):
                             #"follow back rethanks"
-                            print("Thank {} for the reFollow Back :)".format(current[0]))
+                            cF.reFollowBackTweet(current[0])
                             tweetSent = True
                         #else
                         else:
                             #"rethanks"
-                            print("Thank {} for the reFollow :)".format(current[0]))
+                            cF.reFollowTweet(current[0])
                             tweetSent = True
                         #data.rethanked = 1
                         ent = (now.replace(microsecond=0), current[0],)
