@@ -51,7 +51,7 @@ followers_to_thank = 0
 while(1):
 
 
-    print('Checking %s\'s Follower Count and Friend Count')
+    print('Checking %s\'s Follower Count and Friend Count' % queried_user)
     time.sleep(stepPauses)
     users_userobject = cF.getUsersTwitterData(queried_user)
     new_follower_count = users_userobject[0]['followers_count']
