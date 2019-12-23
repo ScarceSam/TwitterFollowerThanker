@@ -176,8 +176,8 @@ while(1):
                             print("Thank {} for the Follow :)".format(current[0]))
                             tweetSent = True
                         #data.thanked = 1
-                        ent = (current[0],)
-                        cursorObj.execute('''UPDATE connections SET thanked = 1 WHERE user_IDs = ?''', ent)
+                        ent = (now.replace(microsecond=0), current[0],)
+                        cursorObj.execute('''UPDATE connections SET isFollower = 1, followDate = ?, thanked = 1 WHERE user_IDs = ?''', ent)
                         DB.commit()
                     #else if data.rethanked = 0
                     elif ((current[6] == 1) and (tweetSent == False)):
@@ -192,13 +192,11 @@ while(1):
                             print("Thank {} for the reFollow :)".format(current[0]))
                             tweetSent = True
                         #data.rethanked = 1
-                        ent = (current[0],)
-                        cursorObj.execute('''UPDATE connections SET rethanked = 1 WHERE user_IDs = ?''', ent)
+                        ent = (now.replace(microsecond=0), current[0],)
+                        cursorObj.execute('''UPDATE connections SET isFollower = 1, followDate = ?, rethanked = 1 WHERE user_IDs = ?''', ent)
                         DB.commit()
-                    #update data.is_follower = 1
-                    ent = (now.replace(microsecond=0), current[0],)
-                    cursorObj.execute('''UPDATE connections SET isFollower = 1, followDate = ?  WHERE user_IDs = ?''', ent)
-                    DB.commit()
+                    elif (tweetSent == True):
+                        followers_to_thank += 1
                     #remove name from follower_list
                 #if not found in follower_list
                 elif (current[0] not in follower_list):
@@ -220,7 +218,7 @@ while(1):
 
             ##save the screen_name of up to 20 users missing them in the DB.
 
-    followers_to_thank = 1 #dev
+    #followers_to_thank = 1 #dev
     print('Pausing loop')
     time.sleep(loopPause)
 
