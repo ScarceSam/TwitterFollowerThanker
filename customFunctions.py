@@ -52,6 +52,21 @@ def getUsersTwitterData(queried_user):
     return output
 
 
+def followBackTweet(user):
+    print("Thank {} for the Follow Back :)".format(user))
+
+
+def followTweet(user):
+    print("Thank {} for the Follow :)".format(user))    
+
+
+def reFollowBackTweet(user):
+    print("Thank {} for the reFollow Back :)".format(user))
+
+
+def reFollowTweet(user):
+    print("Thank {} for the reFollow :)".format(user))
+
 ######### Progress Bar #########
 
 def startProgress(title):
