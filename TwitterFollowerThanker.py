@@ -169,7 +169,7 @@ while(1):
                 elif ((current[0] in cpy_follower_list) and (current[2] == 0)):
                     #if data.thanked = 0
                     if ((current[6] == 0) and (tweetSent == False)):
-                        userName = cF.lookupScreenName(current[0])
+                        userName = cF.userName(current[0])
                         #if data.is_friend = 1
                         if (current[4] == 1):
                             #"follow back thanks"
