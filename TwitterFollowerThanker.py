@@ -214,11 +214,30 @@ while(1):
                     #remove name from follower_list
 
             #name in follower_list
+            for ID in cpy_follower_list:
                 #if in data
                     #error
                 #add to data
+                cursorObj = DB.cursor()
+                entities = (ID, "", 1, now.replace(microsecond=0), 0, '', 0, 0)
+                cursorObj.execute('''INSERT INTO connections VALUES(?, ?, ?, ?, ?, ?, ?, ?)''', entities)
+                DB.commit()
                 #"thanks"
+                if(tweetSent  == False):
+                    userName = cF.userName(ID)
+                    #send thank you tweet
+                    cF.followTweet(userName)
+                    #data.thanked = 1
+                    ent = (userName, ID,)
+                    cursorObj.execute('''UPDATE connections SET screen_name = ?, thanked = 1 WHERE user_IDs = ?''', ent)
+                    DB.commit()
+                    tweetSent = True
+                #else if tweet recently sent put in queue
+                elif(tweetSent  == True):
+                    #people to than +1
+                    followers_to_thank += 1
                 #remove name from follower_list
+                cpy_follower_list.remove(ID)
 
 	    ## The follower list pulled from twitter should be empty now
 	        #error
