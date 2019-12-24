@@ -137,6 +137,7 @@ while(1):
         if followerDif or followers_to_thank:
             tweetSent = False
             followers_to_thank = 0
+            cpy_follower_list = follower_list.copy()
             ######################################update is_follower (?repeat until tweet sent?)<- maybe not###########
             rowsInDB = cF.total_rows(cursorObj, 'connections', False)
     #        cF.startProgress('Updating is_Follower')
@@ -147,7 +148,7 @@ while(1):
                 cursorObj.execute("SELECT * FROM connections WHERE ROWID = {}".format( row))
                 current = cursorObj.fetchone()
                 #if found in follower_list with data.is_follower = 1
-                if( (current[0] in follower_list) and ( current[2] == 1)):
+                if( (current[0] in cpy_follower_list) and ( current[2] == 1)):
                     #if data.thanked = 0 and time_since_last_tweet > delay
                     if( (current[6] == 0) and (tweetSent  == False)):
                         userName = cF.userName(current[0])
@@ -163,8 +164,9 @@ while(1):
                         #people to than +1
                         followers_to_thank += 1
                     #remove name from follower_list
+                    cpy_follower_list.remove(current[0])
                 #if found in follower_list with data.is_follower = 0
-                elif ((current[0] in follower_list) and (current[2] == 0)):
+                elif ((current[0] in cpy_follower_list) and (current[2] == 0)):
                     #if data.thanked = 0
                     if ((current[6] == 0) and (tweetSent == False)):
                         userName = cF.lookupScreenName(current[0])
@@ -202,8 +204,9 @@ while(1):
                     elif (tweetSent == True):
                         followers_to_thank += 1
                     #remove name from follower_list
+                    cpy_follower_list.remove(current[0])
                 #if not found in follower_list
-                elif (current[0] not in follower_list):
+                elif (current[0] not in cpy_follower_list):
                     #update data.is_follower = 0
                     ent = (current[0],)
                     cursorObj.execute('''UPDATE connections SET isFollower = 0, followDate = ''  WHERE user_IDs = ?''', ent)
