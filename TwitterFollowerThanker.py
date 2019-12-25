@@ -245,7 +245,7 @@ while(1):
             ##save the screen_name of up to 20 users missing them in the DB.
 
     #followers_to_thank = 1 #dev
-    print('Pausing loop, people to thank = %d' % followers_to_thank)
+    print('Pausing loop, %d people left to thank' % followers_to_thank)
     time.sleep(loopPause)
 
     #exit() #dev
