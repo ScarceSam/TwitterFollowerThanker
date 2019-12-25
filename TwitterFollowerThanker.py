@@ -183,7 +183,7 @@ while(1):
                         cursorObj.execute('''UPDATE connections SET screen_name = ?, isFollower = 1, followDate = ?, thanked = 1 WHERE user_IDs = ?''', ent)
                         DB.commit()
                     #else if data.rethanked = 0
-                    elif ((current[6] == 1) and (tweetSent == False)):
+                    elif ((current[7] == 0) and (tweetSent == False)):
                         userName = cF.userName(current[0])
                         #if data.is_friend = 1
                         if (current[4] == 1):
