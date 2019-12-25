@@ -1,6 +1,7 @@
 import datetime
 import time
 import customFunctions as cF
+import sys
 
 ##User followers to list
 queried_user = cF.user_name
@@ -246,7 +247,10 @@ while(1):
 
     #followers_to_thank = 1 #dev
     print('Pausing loop, %d people left to thank' % followers_to_thank)
-    time.sleep(loopPause)
+    for i in range(loopPause, 0, -1):
+        sys.stdout.write(' %2d\r' % i)
+        sys.stdout.flush()
+        time.sleep(1)
 
     #exit() #dev
 
