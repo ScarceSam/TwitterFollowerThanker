@@ -238,7 +238,9 @@ while(1):
                 cpy_follower_list.remove(ID)
 
 	    ## The follower list pulled from twitter should be empty now
-	        #error
+            if len(cpy_follower_list):
+                #error
+                print("Error: Followers list copy is not empty after saving all followers")
 
             ##save the screen_name of up to 20 users missing them in the DB.
 
