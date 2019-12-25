@@ -130,9 +130,7 @@ while(1):
             #if friend_list is not empty there is an error.
             cF.endProgress()
             if( friend_list ):
-                print('error')
-            else:
-                print('success')
+                print("Error: Friends list is not empty after saving all friends")
 
         if followerDif or followers_to_thank:
             tweetSent = False
