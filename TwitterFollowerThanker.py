@@ -139,8 +139,8 @@ while(1):
             cpy_follower_list = follower_list.copy()
             ######################################update is_follower (?repeat until tweet sent?)<- maybe not###########
             rowsInDB = cF.total_rows(cursorObj, 'connections', False)
-    #        cF.startProgress('Updating is_Follower')
-    #        progressTotal = (len(follower_list) + rowsInDB)
+            cF.startProgress('Updating is_Follower')
+            progressTotal = (len(follower_list) + rowsInDB)
 
             #name in the DB
             for row in range( 1, ( rowsInDB + 1)):
@@ -211,6 +211,7 @@ while(1):
                     cursorObj.execute('''UPDATE connections SET isFollower = 0, followDate = ''  WHERE user_IDs = ?''', ent)
                     DB.commit()
                     #remove name from follower_list
+                cF.progress(((progressTotal-(len(cpy_folower_list)-row))/progressTotal)*100)
 
             #name in follower_list
             for ID in cpy_follower_list:
@@ -237,7 +238,9 @@ while(1):
                     followers_to_thank += 1
                 #remove name from follower_list
                 cpy_follower_list.remove(ID)
+                cF.progress(((progressTotal-len(cpy_follower_list))/progressTotal)*100)
 
+            cF.endProgress()
 	    ## The follower list pulled from twitter should be empty now
             if len(cpy_follower_list):
                 #error
