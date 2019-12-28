@@ -137,6 +137,7 @@ while(1):
             tweetSent = False
             followers_to_thank = 0
             cpy_follower_list = follower_list.copy()
+            whoHowThanked = ''
             ######################################update is_follower (?repeat until tweet sent?)<- maybe not###########
             rowsInDB = cF.total_rows(cursorObj, 'connections', False)
             cF.startProgress('Updating is_Follower')
@@ -152,7 +153,7 @@ while(1):
                     if( (current[6] == 0) and (tweetSent  == False)):
                         userName = cF.userName(current[0])
                         #send thank you tweet
-                        cF.followTweet(userName)
+                        whoHowThanked = cF.followTweet(userName)
                         #data.thanked = 1
                         ent = (userName, current[0],)
                         cursorObj.execute('''UPDATE connections SET screen_name = ?, thanked = 1 WHERE user_IDs = ?''', ent)
@@ -172,12 +173,12 @@ while(1):
                         #if data.is_friend = 1
                         if (current[4] == 1):
                             #"follow back thanks"
-                            cF.followBackTweet(userName)
+                            whoHowThanked = cF.followBackTweet(userName)
                             tweetSent = True
                         #else
                         else:
                             #"thanks"
-                            cF.followTweet(userName)
+                            whoHowThanked = cF.followTweet(userName)
                             tweetSent = True
                         #data.thanked = 1
                         ent = (userName, now.replace(microsecond=0), current[0],)
@@ -189,12 +190,12 @@ while(1):
                         #if data.is_friend = 1
                         if (current[4] == 1):
                             #"follow back rethanks"
-                            cF.reFollowBackTweet(userName)
+                            whoHowthanked = cF.reFollowBackTweet(userName)
                             tweetSent = True
                         #else
                         else:
                             #"rethanks"
-                            cF.reFollowTweet(userName)
+                            whoHowThanked = cF.reFollowTweet(userName)
                             tweetSent = True
                         #data.rethanked = 1
                         ent = (userName, now.replace(microsecond=0), current[0],)
@@ -226,7 +227,7 @@ while(1):
                 if(tweetSent  == False):
                     userName = cF.userName(ID)
                     #send thank you tweet
-                    cF.followTweet(userName)
+                    whoHowThanked = cF.followTweet(userName)
                     #data.thanked = 1
                     ent = (userName, ID,)
                     cursorObj.execute('''UPDATE connections SET screen_name = ?, thanked = 1 WHERE user_IDs = ?''', ent)
@@ -241,6 +242,14 @@ while(1):
                 cF.progress(((progressTotal-len(cpy_follower_list))/progressTotal)*100)
 
             cF.endProgress()
+
+
+            if tweetSent:
+                print("%s was sent a %s tweet" % whoHowThanked)
+            else:
+                print("No tweets sent")
+
+
 	    ## The follower list pulled from twitter should be empty now
             if len(cpy_follower_list):
                 #error
