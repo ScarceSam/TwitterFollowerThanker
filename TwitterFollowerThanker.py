@@ -211,7 +211,7 @@ while(1):
                     cursorObj.execute('''UPDATE connections SET isFollower = 0, followDate = ''  WHERE user_IDs = ?''', ent)
                     DB.commit()
                     #remove name from follower_list
-                cF.progress(((progressTotal-(len(cpy_folower_list)-row))/progressTotal)*100)
+                cF.progress((  ((len(follower_list)-len(cpy_follower_list)) + row)  /progressTotal)*100)
 
             #name in follower_list
             for ID in cpy_follower_list:
