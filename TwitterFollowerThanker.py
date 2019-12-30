@@ -137,7 +137,7 @@ while(1):
             tweetSent = False
             followers_to_thank = 0
             cpy_follower_list = follower_list.copy()
-            whoHowThanked = ''
+            whoHowThanked = ('No one', '')
             ######################################update is_follower (?repeat until tweet sent?)<- maybe not###########
             rowsInDB = cF.total_rows(cursorObj, 'connections', False)
             cF.startProgress('Updating is_Follower')
@@ -243,12 +243,7 @@ while(1):
 
             cF.endProgress()
 
-
-            if tweetSent:
-                print("%s was sent a %s tweet" % whoHowThanked)
-            else:
-                print("No tweets sent")
-
+            print("%s was sent a%s tweet" % whoHowThanked)
 
 	    ## The follower list pulled from twitter should be empty now
             if len(cpy_follower_list):
