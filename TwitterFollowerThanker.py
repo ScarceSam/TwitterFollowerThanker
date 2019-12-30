@@ -190,7 +190,7 @@ while(1):
                         #if data.is_friend = 1
                         if (current[4] == 1):
                             #"follow back rethanks"
-                            whoHowthanked = cF.reFollowBackTweet(userName)
+                            whoHowThanked = cF.reFollowBackTweet(userName)
                             tweetSent = True
                         #else
                         else:
