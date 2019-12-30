@@ -8,7 +8,7 @@ queried_user = cF.user_name
 stepPauses = 0.2
 dbFileName = queried_user + '.db'
 loopPause = 30
-
+tweetDelaySec = 120
 
 # Check for Existing DB file
 # If not, Create it and populate it with follower list
@@ -48,6 +48,7 @@ new_friend_count = 0
 follower_list = []
 friend_list = []
 followers_to_thank = 0
+lastTweetTime  = 0
 
 while(1):
 
@@ -134,7 +135,9 @@ while(1):
                 print("Error: Friends list is not empty after saving all friends")
 
         if followerDif or followers_to_thank:
-            tweetSent = False
+            if(time.time() > lastTweetTime + tweetDelaySec):
+                tweetSent = False
+                lastTweetTime = time.time()
             followers_to_thank = 0
             cpy_follower_list = follower_list.copy()
             whoHowThanked = ('No one', '')
