@@ -53,19 +53,39 @@ def getUsersTwitterData(queried_user):
 
 
 def followBackTweet(user):
-    return(user, "Follow Back")
+    message = '''{}, Thank you for the Follow Back!
+\U0001f44b\U0001f600
+
+-My Follower Thanking #TwitterBot'''.format(user)
+    twitter.update_status(status=message)
+    return(user, "Follow Back thanks")
 
 
 def followTweet(user):
-    return(user, "Follow")
+    message = '''{}, Thank you for the Follow!
+\U0001f44b\U0001f600
+
+-My Follower Thanking #TwitterBot'''.format(user)
+    twitter.update_status(status=message)
+    return(user, "Follow thanks")
 
 
 def reFollowBackTweet(user):
-    return(user, "reFollow Back")
+    message = '''Welcome back {} \U0001f601, Thanks for the re-Follow Back!
+\U0001f44b\U0001f600
+
+-My Follower Thanking #TwitterBot'''.format(user)
+    twitter.update_status(status=message)
+    return(user, "reFollow Back thanks")
 
 
 def reFollowTweet(user):
-    return(user, "reFollow")
+    message = '''Welcome back {} \U0001f601, Thanks for the re-Follow!
+\U0001f44b\U0001f600
+
+-My Follower Thanking #TwitterBot'''.format(user)
+    twitter.update_status(status=message)
+    return(user, "reFollow thanks")
 
 
 def userName(userID):
