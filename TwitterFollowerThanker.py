@@ -9,6 +9,7 @@ stepPauses = 0.2
 dbFileName = queried_user + '.db'
 loopPause = 30
 tweetDelaySec = 120
+forcedFollowerUpdate = 3600
 
 # Check for Existing DB file
 # If not, Create it and populate it with follower list
@@ -49,6 +50,7 @@ follower_list = []
 friend_list = []
 followers_to_thank = 0
 lastTweetTime  = 0
+lastFollowerCheck = time.time()
 
 while(1):
 
@@ -60,6 +62,9 @@ while(1):
     new_friend_count = users_userobject[0]['friends_count']
     followerDif = new_follower_count - old_follower_count
     friendDif = new_friend_count - old_friend_count
+
+    if time.time() > lastFollowerCheck + forcedFollowerUpdate
+        followerDif = 1
 
     if not followerDif and not friendDif and not followers_to_thank:
         print('No changes to follower or friend counts and all followers have been thanked')
@@ -82,6 +87,7 @@ while(1):
                 print('Pulling follower list')
                 follower_list = cF.getFollowers(queried_user)
                 old_follower_count = len(follower_list)
+                lastFollowerCheck = time.time()
 
 
             #pull user's friends list save to list
