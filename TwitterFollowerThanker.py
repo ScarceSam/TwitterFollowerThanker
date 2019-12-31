@@ -65,6 +65,7 @@ while(1):
 
     if time.time() > lastFollowerCheck + forcedFollowerUpdate:
         followerDif = 1
+        print('Force follower and friend update')
 
     if not followerDif and not friendDif and not followers_to_thank:
         print('No changes to follower or friend counts and all followers have been thanked')
@@ -72,6 +73,8 @@ while(1):
     else:
 
         #What was the change in follower and/or friend count?
+        print('%d follower change, %d friend change' % (followerDif, friendDif))
+
 
         print('Starting thanking process')
         time.sleep(stepPauses)
