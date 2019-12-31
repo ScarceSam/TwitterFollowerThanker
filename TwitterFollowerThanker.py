@@ -63,7 +63,7 @@ while(1):
     followerDif = new_follower_count - old_follower_count
     friendDif = new_friend_count - old_friend_count
 
-    if time.time() > lastFollowerCheck + forcedFollowerUpdate
+    if time.time() > lastFollowerCheck + forcedFollowerUpdate:
         followerDif = 1
 
     if not followerDif and not friendDif and not followers_to_thank:
