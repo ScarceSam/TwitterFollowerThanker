@@ -5,7 +5,6 @@ import sys
 
 ##User followers to list
 queried_user = cF.user_name
-stepPauses = 0.2
 dbFileName = queried_user + '.db'
 loopPause = 30
 tweetDelaySec = 120
@@ -28,7 +27,6 @@ except FileNotFoundError:
     follower_list = cF.getFollowers(queried_user)
 
     print('@%s has %d followers' % ( queried_user, len( follower_list)))
-    time.sleep(stepPauses)
 
     cF.startProgress('Populating DataBase')
     numOfEntries = len(follower_list)
@@ -54,9 +52,7 @@ lastFollowerCheck = time.time()
 
 while(1):
 
-
     print('Checking %s\'s Follower Count and Friend Count' % queried_user)
-    time.sleep(stepPauses)
     users_userobject = cF.getUsersTwitterData(queried_user)
     new_follower_count = users_userobject[0]['followers_count']
     new_friend_count = users_userobject[0]['friends_count']
@@ -69,15 +65,12 @@ while(1):
 
     if not followerDif and not friendDif and not followers_to_thank:
         print('No changes to follower or friend counts and all followers have been thanked')
-        time.sleep(stepPauses)
     else:
 
         #What was the change in follower and/or friend count?
         print('%d follower change, %d friend change' % (followerDif, friendDif))
 
-
         print('Starting thanking process')
-        time.sleep(stepPauses)
 
         DB = cF.sql_connection(dbFileName)
         cursorObj = DB.cursor()
@@ -150,6 +143,8 @@ while(1):
             followers_to_thank = 0
             cpy_follower_list = follower_list.copy()
             whoHowThanked = ('No one', '')
+
+
             ######################################update is_follower (?repeat until tweet sent?)<- maybe not###########
             rowsInDB = cF.total_rows(cursorObj, 'connections', False)
             cF.startProgress('Updating is_Follower')
@@ -264,7 +259,7 @@ while(1):
 
             ##save the screen_name of up to 20 users missing them in the DB.
 
-    #followers_to_thank = 1 #dev
+
     print('Pausing loop, %d people left to thank' % followers_to_thank)
 
     delayToTweet = lastTweetTime + tweetDelaySec - time.time()
@@ -279,6 +274,4 @@ while(1):
         sys.stdout.write(' %2d\r' % i)
         sys.stdout.flush()
         time.sleep(1)
-
-    #exit() #dev
 
