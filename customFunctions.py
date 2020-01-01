@@ -58,7 +58,7 @@ def followBackTweet(user):
 
 -My Follower Thanking #TwitterBot'''.format(user)
     twitter.update_status(status=message)
-    return(user, "Follow Back thanks")
+    return(user, " Follow Back thanks")
 
 
 def followTweet(user):
@@ -67,7 +67,7 @@ def followTweet(user):
 
 -My Follower Thanking #TwitterBot'''.format(user)
     twitter.update_status(status=message)
-    return(user, "Follow thanks")
+    return(user, " Follow thanks")
 
 
 def reFollowBackTweet(user):
@@ -76,7 +76,7 @@ def reFollowBackTweet(user):
 
 -My Follower Thanking #TwitterBot'''.format(user)
     twitter.update_status(status=message)
-    return(user, "reFollow Back thanks")
+    return(user, " reFollow Back thanks")
 
 
 def reFollowTweet(user):
@@ -85,7 +85,7 @@ def reFollowTweet(user):
 
 -My Follower Thanking #TwitterBot'''.format(user)
     twitter.update_status(status=message)
-    return(user, "reFollow thanks")
+    return(user, " reFollow thanks")
 
 
 def userName(userID):
