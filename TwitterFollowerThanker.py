@@ -266,6 +266,15 @@ while(1):
 
     #followers_to_thank = 1 #dev
     print('Pausing loop, %d people left to thank' % followers_to_thank)
+
+    delayToTweet = lastTweetTime + tweetDelaySec - time.time()
+    if delayToTweet >= 120 and followers_to_thank:
+        print('~%.1f Minutes until next tweet' % (delayToTweet / 60.0))
+    elif delayToTweet > 30 and followers_to_thank:
+        print('~%d Seconds until next tweet' % delayToTweet)
+    else:
+        print('~30 Seconds until next tweet')
+
     for i in range(loopPause, 0, -1):
         sys.stdout.write(' %2d\r' % i)
         sys.stdout.flush()
