@@ -58,12 +58,13 @@ while(1):
     new_friend_count = users_userobject[0]['friends_count']
     followerDif = new_follower_count - old_follower_count
     friendDif = new_friend_count - old_friend_count
+    forceUpdate = 0
 
     if time.time() > lastFollowerCheck + forcedFollowerUpdate:
-        followerDif = 1
+        forceUpdate = 1
         print('Force follower and friend update')
 
-    if not followerDif and not friendDif and not followers_to_thank:
+    if not followerDif and not friendDif and not followers_to_thank and not forceUpdate:
         print('No changes to follower or friend counts and all followers have been thanked')
     else:
 
@@ -77,8 +78,8 @@ while(1):
 
         now = datetime.datetime.now()
 
-        if friendDif or followerDif:
-            if followerDif:
+        if friendDif or followerDif or forceUpdate:
+            if followerDif or forceUpdate:
                 #check user's follower list save to list
                 print('Pulling follower list')
                 follower_list = cF.getFollowers(queried_user)
@@ -136,7 +137,7 @@ while(1):
             if( friend_list ):
                 print("Error: Friends list is not empty after saving all friends")
 
-        if followerDif or followers_to_thank:
+        if followerDif or followers_to_thank or forceUpdate:
             if(time.time() > lastTweetTime + tweetDelaySec):
                 tweetSent = False
                 lastTweetTime = time.time()
