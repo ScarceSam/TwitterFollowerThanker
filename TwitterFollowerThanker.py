@@ -52,7 +52,7 @@ lastFollowerCheck = time.time()
 
 while(1):
 
-    print('Checking %s\'s Follower Count and Friend Count' % queried_user)
+    #print('Checking %s\'s Follower Count and Friend Count' % queried_user)
     users_userobject = cF.getUsersTwitterData(queried_user)
     new_follower_count = users_userobject[0]['followers_count']
     new_friend_count = users_userobject[0]['friends_count']
@@ -65,7 +65,7 @@ while(1):
         print('Force follower and friend update')
 
     if not followerDif and not friendDif and not followers_to_thank and not forceUpdate:
-        print('No changes to follower or friend counts and all followers have been thanked')
+        print('No changes')
     else:
 
         #What was the change in follower and/or friend count?
