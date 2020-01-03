@@ -260,8 +260,10 @@ while(1):
 
             ##save the screen_name of up to 20 users missing them in the DB.
 
-
-    print('Pausing loop, %d people left to thank' % followers_to_thank)
+    if followers_to_thank:
+        print('Pausing loop, %d people left to thank' % followers_to_thank)
+    else:
+        print('Pausing loop')
 
     delayToTweet = lastTweetTime + tweetDelaySec - time.time()
     if delayToTweet >= 120 and followers_to_thank:
