@@ -270,7 +270,7 @@ while(1):
         print('~%.1f Minutes until next tweet' % (delayToTweet / 60.0))
     elif delayToTweet > 30 and followers_to_thank:
         print('~%d Seconds until next tweet' % delayToTweet)
-    else:
+    elif followers_to_thank:
         print('~30 Seconds until next tweet')
 
     for i in range(loopPause, 0, -1):
