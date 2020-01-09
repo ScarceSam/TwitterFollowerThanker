@@ -65,14 +65,14 @@ while(1):
         print('Force follower and friend update')
 
     if not followerDif and not friendDif and not followers_to_thank and not forceUpdate:
-        print('No changes')
+#        print('No changes')
         forceUpdate = 0
     else:
 
         #What was the change in follower and/or friend count?
         print('%d follower change, %d friend change' % (followerDif, friendDif))
 
-        print('Starting thanking process')
+#        print('Starting thanking process')
 
         DB = cF.sql_connection(dbFileName)
         cursorObj = DB.cursor()
@@ -263,8 +263,8 @@ while(1):
 
     if followers_to_thank:
         print('Pausing loop, %d people left to thank' % followers_to_thank)
-    else:
-        print('Pausing loop')
+#    else:
+#        print('Pausing loop')
 
     delayToTweet = lastTweetTime + tweetDelaySec - time.time()
     if delayToTweet >= 120 and followers_to_thank:
