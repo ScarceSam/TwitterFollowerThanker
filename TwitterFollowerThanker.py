@@ -8,7 +8,7 @@ queried_user = cF.user_name
 dbFileName = queried_user + '.db'
 loopPause = 30
 tweetDelaySec = 120
-forcedFollowerUpdate = 3600
+forcedFollowerUpdate = 43200
 
 # Check for Existing DB file
 # If not, Create it and populate it with follower list
