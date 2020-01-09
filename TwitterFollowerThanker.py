@@ -252,6 +252,7 @@ while(1):
 
             cF.endProgress()
 
+            print("%02.d/%02.d %d:%d, " %(now.month, now.day, now.hour, now.minute), end= '')
             print("%s was sent a%s tweet" % whoHowThanked)
 
 	    ## The follower list pulled from twitter should be empty now
