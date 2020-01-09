@@ -66,6 +66,7 @@ while(1):
 
     if not followerDif and not friendDif and not followers_to_thank and not forceUpdate:
         print('No changes')
+        forceUpdate = 0
     else:
 
         #What was the change in follower and/or friend count?
