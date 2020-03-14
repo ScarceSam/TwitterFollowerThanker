@@ -2,7 +2,7 @@ from twython import Twython
 import sys
 import sqlite3
 from sqlite3 import Error
-
+import time
 
 
 ########## Twython Interactions ##########
@@ -48,7 +48,14 @@ def getFriends(queried_user):
     return output
 
 def getUsersTwitterData(queried_user):
-    output = twitter.lookup_user(screen_name = queried_user)
+    output = None
+    while output is None:
+        try:
+            output = twitter.lookup_user(screen_name = queried_user)
+        except Exception as e:
+            print(e)
+            time.sleep(60)
+
     return output
 
 
